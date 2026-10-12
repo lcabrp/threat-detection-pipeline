@@ -97,3 +97,18 @@ Track your progress with these metrics:
 - [Airflow Documentation](https://airflow.apache.org/docs/)
 - [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp)
 - [SQL Window Functions](https://mode.com/sql-tutorial/sql-window-functions/)
+
+## Portable synthetic log dataset
+
+The full generated dataset is preserved in `data/synthetic_logs.ndjson.gz`.
+The uncompressed `data/synthetic_logs.ndjson` is 116,805,704 bytes and exceeds GitHub's file limit, so it stays local.
+The gzip archive restores the original bytes exactly; it is not a sample or a new dataset format for the pipeline.
+
+After cloning, run this from the repository root to restore the path used by the pipeline:
+
+```powershell
+python -c "import gzip,pathlib; p=pathlib.Path('data/synthetic_logs.ndjson'); p.open('xb').write(gzip.open(str(p)+'.gz','rb').read())"
+```
+
+The command refuses to overwrite an existing local dataset.
+Original SHA-256: `0017d93d49efdd5dcf6a64c2d179e5b920cb99e05ed006b20c7667718d43f271`.
